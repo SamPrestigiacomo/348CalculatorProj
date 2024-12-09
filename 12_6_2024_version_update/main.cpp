@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void lower(string& str) {
+void lower(string& str) { //converts the user input to lowercase to easily check if the input is "exit"
     transform(str.begin(), str.end(), str.begin(), [](unsigned char c) { return tolower(c); });
 }
 
@@ -26,10 +26,10 @@ int main() {
         if (user_input == "exit") break;
 
         try {
-            vector<string> tokens = parseExpression(user_input);
-            isValidExpression(tokens);
+            vector<string> tokens = parseExpression(user_input); //parses the input into readable bits
+            isValidExpression(tokens); //checks the input for common invalid syntax
 
-            double result = evaluateExpression(tokens);
+            double result = evaluateExpression(tokens); //sends the parsed bits to be evaluated
 
             cout << "Result: " << result << endl;
         }
