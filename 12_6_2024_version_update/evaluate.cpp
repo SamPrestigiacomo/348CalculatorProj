@@ -23,6 +23,8 @@ double applyOperation(double a, double b, const string& op) {
 }
 
 double evaluateTokens(vector<string>& tokens, int start, int end) {
+    if (start > end) throw invalid_argument("Invalid Expression");
+    
     try {
         if (start == end) return stod(tokens[start]);
     } catch (...) {
