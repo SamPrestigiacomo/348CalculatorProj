@@ -8,7 +8,7 @@
 
 using namespace std;
 
-double applyOperation(double a, double b, const string& op) {
+double applyOperation(double a, double b, const string& op) { //helper function for evaluateTokens, does the actual calculation
     if (op == "+") return a + b;
     if (op == "-") return a - b;
     if (op == "*") return a * b;
@@ -22,16 +22,16 @@ double applyOperation(double a, double b, const string& op) {
     throw invalid_argument("Unknown operator");
 }
 
-double evaluateTokens(vector<string>& tokens, int start, int end) {
+double evaluateTokens(vector<string>& tokens, int start, int end) { //recusive algorithm to evaluate the parsed bits
     if (start > end) throw invalid_argument("Invalid Expression");
     
     try {
-        if (start == end) return stod(tokens[start]);
+        if (start == end) return stod(tokens[start]); //base case to return a number
     } catch (...) {
         throw invalid_argument("Invalid Expression");
     }
     
-    if (end - start == 1) {
+    if (end - start == 1) { //handles some cases of the unary operator
         if (tokens[start] == "+") return stod(tokens[end]);
         else if (tokens[start] == "-") return -1 * stod(tokens[end]);
         else throw invalid_argument("Invalid Expression");
@@ -55,19 +55,19 @@ double evaluateTokens(vector<string>& tokens, int start, int end) {
 
             if (currentPrecedence >= precedence) {
                 precedence = currentPrecedence;
-                lastOperator = i;
+                lastOperator = i; //last operator is the operator of least precedence
             }
         }
     }
     
     if (lastOperator == -1) {
         if (tokens[start] == "(" && tokens[end] == ")") {
-            return evaluateTokens(tokens, start + 1, end - 1);
+            return evaluateTokens(tokens, start + 1, end - 1); //evaluates expression within parentheses
         }
         throw invalid_argument("Invalid expression");
     }
     
-    if (start > lastOperator - 1) {
+    if (start > lastOperator - 1) { //handles some cases of the unary operator
         if (tokens[start] == "+") return evaluateTokens(tokens, start + 1, end);
         else if (tokens[start] == "-") return -1 * evaluateTokens(tokens, start +1, end);
         throw invalid_argument("Invalid Expression");
