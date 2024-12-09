@@ -32,6 +32,7 @@ double evaluateTokens(vector<string>& tokens, int start, int end) {
     if (end - start == 1) {
         if (tokens[start] == "+") return stod(tokens[end]);
         else if (tokens[start] == "-") return -1 * stod(tokens[end]);
+        else throw invalid_argument("Invalid Expression");
     }
 
     int parenBalance = 0;
