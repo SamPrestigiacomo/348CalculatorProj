@@ -1,4 +1,0 @@
-//fixed an error with precedence in file evaluate.cpp, in evaluateTokens(), when setting the value for currentPrecedence (switched the 3 and 1)
-//fixed an error where the program would not properly handle a single character input of an operator (Ex. "+", or "-"), this is the first part of the evaluateTokens() function in evaluate.cpp
-//fixed an error where the program did not properly handle unary operators (Ex. "-(+2)*(+3)-(-4)/(-5)")
-//files changed: evaluate.cpp, parse.cpp
